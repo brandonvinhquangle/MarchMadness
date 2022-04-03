@@ -16,7 +16,7 @@
   <div class="footer">
     <router-link to="/">Home</router-link>
     <router-link to="/admin">Admin</router-link>
-    <a href="https://github.com/BYUCS260/lab-4-museum-brandonvinhquangle" target="_blank">GitHub Link</a>
+    <a href="https://github.com/brandonvinhquangle/March_Madness" target="_blank">GitHub Link</a>
   </div>
 </div>
 </template>
