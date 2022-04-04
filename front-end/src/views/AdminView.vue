@@ -3,43 +3,49 @@
   <h1>The Admin Page</h1>
   <div class="heading">
     <div class="circle">1</div>
-    <h2>Add an Item</h2>
+    <h2>Add an team</h2>
   </div>
   <div class="add">
     <div class="form">
-      <input v-model="title" placeholder="Title">
-      <input v-model="description" placeholder="Description">
+      <input v-model="name" placeholder="Name">
+      <input v-model="record" placeholder="Record">
+      <input v-model="conference" placeholder="Conference">
+      <input v-model="city" placeholder="City">
+      <input v-model="state" placeholder="State">
       <p></p>
       <input type="file" name="photo" @change="fileChanged">
       <button @click="upload">Upload</button>
     </div>
-    <div class="upload" v-if="addItem">
-      <h2 class="itemTitle">{{addItem.title}}</h2>
-      <p>{{addItem.description}}</p>
-      <img :src="addItem.path" />
+    <div class="upload" v-if="addTeam">
+      <h2 class="teamName">{{addTeam.name}}</h2>
+      <p>{{addTeam.record}}</p>
+      <img :src="addTeam.path" />
     </div>
   </div>
   <div class="heading">
     <div class="circle">2</div>
-    <h2>Edit/Delete an Item</h2>
+    <h2>Edit/Delete an Team</h2>
   </div>
   <div class="edit">
     <div class="form">
-      <input v-model="findTitle" placeholder="Search">
+      <input v-model="findName" placeholder="Search">
       <div class="suggestions" v-if="suggestions.length > 0">
-        <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectItem(s)">{{s.title}}
+        <div class="suggestion" v-for="s in suggestions" :key="s.id" @click="selectTeam(s)">{{s.name}}
         </div>
       </div>
     </div>
-    <div class="upload" v-if="findItem">
-      <input v-model="findItem.title">
-      <input v-model="findItem.description">
+    <div class="upload" v-if="findTeam">
+      <input v-model="findTeam.name">
+      <input v-model="findTeam.record">
+      <input v-model="findTeam.conference">
+      <input v-model="findTeam.city">
+      <input v-model="findTeam.state">
       <p></p>
-      <img :src="findItem.path" />
+      <img :src="findTeam.path" />
     </div>
-    <div class="actions" v-if="findItem">
-      <button @click="deleteItem(findItem)">Delete</button>
-      <button @click="editItem(findItem)">Edit</button>
+    <div class="actions" v-if="findTeam">
+      <button @click="deleteTeam(findTeam)">Delete</button>
+      <button @click="editTeam(findTeam)">Edit</button>
     </div>
   </div>
 </div>
@@ -51,17 +57,20 @@ export default {
   name: 'AdminView',
   data() {
     return {
-      title: "",
-      description: "",
+      name: "",
+      record: "",
+      conference: "",
+      city: "",
+      state: "",
       file: null,
-      addItem: null,
-      items: [],
-      findTitle: "",
-      findItem: null,
+      addTeam: null,
+      teams: [],
+      findName: "",
+      findTeam: null,
     }
   },
   created() {
-    this.getItems();
+    this.getTeams();
   },
   methods: {
     fileChanged(event) {
@@ -72,47 +81,53 @@ export default {
         const formData = new FormData();
         formData.append('photo', this.file, this.file.name)
         let r1 = await axios.post('/api/photos', formData);
-        let r2 = await axios.post('/api/items', {
-          title: this.title,
-          description: this.description,
+        let r2 = await axios.post('/api/teams', {
+          name: this.name,
+          record: this.record,
+          conference: this.conference,
+          city: this.city,
+          state: this.state,
           path: r1.data.path,
         });
-        this.addItem = r2.data;
+        this.addTeam = r2.data;
       } catch (error) {
         console.log(error);
       }
     },
-    async getItems() {
+    async getTeams() {
       try {
-        let response = await axios.get("/api/items");
-        this.items = response.data;
+        let response = await axios.get("/api/teams");
+        this.teams = response.data;
         return true;
       } catch (error) {
         console.log(error);
       }
     },
-    selectItem(item) {
-      this.findTitle = "";
-      this.findItem = item;
+    selectTeam(team) {
+      this.findName = "";
+      this.findTeam = team;
     },
-    async deleteItem(item) {
+    async deleteTeam(team) {
       try {
-        await axios.delete("/api/items/" + item._id);
-        this.findItem = null;
-        this.getItems();
+        await axios.delete("/api/teams/" + team._id);
+        this.findTeam = null;
+        this.getTeams();
         return true;
       } catch (error) {
         console.log(error);
       }
     },
-    async editItem(item) {
+    async editTeam(team) {
       try {
-        await axios.put("/api/items/" + item._id, {
-          title: this.findItem.title,
-          description: this.findItem.description,
+        await axios.put("/api/teams/" + team._id, {
+          name: this.findTeam.name,
+          record: this.findTeam.record,
+          conference: this.findTeam.conference,
+          city: this.findTeam.city,
+          state: this.findTeam.state,
         });
-        this.findItem = null;
-        this.getItems();
+        this.findName = null;
+        this.getTeams();
         return true;
       } catch (error) {
         console.log(error);
@@ -121,15 +136,15 @@ export default {
   },
   computed: {
     suggestions() {
-      let items = this.items.filter(item => item.title.toLowerCase().startsWith(this.findTitle.toLowerCase()));
-      return items.sort((a, b) => a.title > b.title);
+      let teams = this.teams.filter(team => team.name.toLowerCase().startsWith(this.findName.toLowerCase()));
+      return teams.sort((a, b) => a.name > b.name);
     }
   },
 }
 </script>
 
 <style scoped>
-.itemTitle {
+.teamName {
   font-size: 1.3em;
 }
 
@@ -142,6 +157,7 @@ export default {
   display: flex;
   margin-bottom: 20px;
   margin-top: 20px;
+  /* justify-content: center; */
 }
 
 .heading h2 {
@@ -152,6 +168,7 @@ export default {
 .add,
 .edit {
   display: flex;
+  /* justify-content: center; */
 }
 
 .circle {
@@ -171,6 +188,7 @@ select,
 button {
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
+  text-align: center;
 }
 
 .form {

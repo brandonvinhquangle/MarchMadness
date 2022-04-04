@@ -27,7 +27,7 @@ const upload = multer({
 });
 
 /* Data for the APIs */
-// Creates a scheme for team: a title and a path to an image.
+// Creates a scheme for team: a name, record, conference, city, state, and a path to an image.
 const teamSchema = new mongoose.Schema({
   name: String,
   record: String,
@@ -37,12 +37,12 @@ const teamSchema = new mongoose.Schema({
   path: String,
 });
 
-// Creates a model for items in the museum.
+// Creates a model for the teams in the tournament.
 const Team = mongoose.model('Team', teamSchema);
 
 /* REST APIs */
-// Get a list of all of the items in the museum.
-app.get('/api/team', async (req, res) => {
+// Get a list of all of the teams in the tournament.
+app.get('/api/teams', async (req, res) => {
   try {
     let teams = await Team.find();
     res.send(teams);
@@ -52,7 +52,7 @@ app.get('/api/team', async (req, res) => {
   }
 });
 
-// Creates a new item in the museum: takes a title and a path to an image.
+// Creates a new team in the tournamenent: takes a name, record, conference, city, state, and a path to an image.
 app.post('/api/teams', async (req, res) => {
   const team = new Team({
     name: req.body.name,
