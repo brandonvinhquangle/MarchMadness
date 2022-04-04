@@ -24,7 +24,7 @@
   </div>
   <div class="heading">
     <div class="circle">2</div>
-    <h2>Edit/Delete an Team</h2>
+    <h2>Edit/Delete a Team</h2>
   </div>
   <div class="edit">
     <div class="form">
