@@ -3,7 +3,7 @@
   <div class="teams">
     <div class="team" v-for="team in teams" :key="team.id">
       <div class="image" @click="pickTeam(team)">
-        <img :src="team.image">
+        <img :src="team.path">
       </div>
       <div class="name">
         <h2>{{team.name}}</h2>

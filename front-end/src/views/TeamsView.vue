@@ -9,17 +9,32 @@
 </template>
 
 <script>
+import axios from 'axios';
 import TeamCard from "../components/TeamCard.vue"
 export default {
   name: 'TeamsView',
+  data() {
+    return {
+      teams: [],
+    }
+  },
+  created() {
+    this.getTeams();
+  },
+  methods: {
+    async getTeams() {
+      try {
+        let response = await axios.get("/api/teams");
+        this.teams = response.data;
+        return true;
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
   components: {
     TeamCard
   },
-  computed: {
-    teams() {
-      return this.$root.$data.teams;
-    }
-  }
 }
 </script>
 
