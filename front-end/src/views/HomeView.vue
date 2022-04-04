@@ -17,7 +17,7 @@ export default {
   name: 'HomeView',
   data() {
     return {
-     items: [],
+      items: [],
     }
   },
   created() {
