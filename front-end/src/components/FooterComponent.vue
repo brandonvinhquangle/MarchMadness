@@ -16,5 +16,6 @@
 
 #github-icon {
   height: 60px;
+  margin-top: 10px;
 }
 </style>
