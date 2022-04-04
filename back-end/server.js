@@ -13,7 +13,7 @@ app.use(cors());
 /* Mongoose */
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://CS-260:Password@cluster0.mdzpn.mongodb.net/museum?', {
+mongoose.connect('mongodb+srv://CS-260:Password@cluster0.mdzpn.mongodb.net/teams?', {
   useNewUrlParser: true
 });
 
