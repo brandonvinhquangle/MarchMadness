@@ -1,79 +1,50 @@
 <template>
-<div id="app">
-  <div class="header">
-    <router-link to="/">
-      <div class="logo">
-        <img src="/ordinary.png">
-      </div>
-    </router-link>
-    <div class="title">
-      <h1>Museum of Ordinary Objects</h1>
-    </div>
+  <div id="app">
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link to="/teams">The Teams</router-link> |
+      <router-link to="/admin">Admin</router-link> |
+      <router-link to="/about">About</router-link>
+    </nav>
+    <router-view/>
+    
+    <FooterComponent/>
   </div>
-  <div class="content">
-    <router-view />
-  </div>
-  <div class="footer">
-    <router-link to="/">Home</router-link>
-    <router-link to="/admin">Admin</router-link>
-    <a href="https://github.com/BYUCS260/lab-4-museum-brandonvinhquangle" target="_blank">GitHub Link</a>
-  </div>
-</div>
 </template>
 
 <style>
-html {
+/*
+primary: rgb(39, 92, 178)
+secondary: rgb(114, 122, 131)
+dark: rgb(34, 31, 32)
+*/
+
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  padding: 0px;
+  margin: 0px;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
-  background: #fff;
-  padding: 0px;
-  margin: 0px;
-}
-
-/* Header */
-.header {
-  display: flex;
-  padding: 10px 100px 0px 100px;
-  background-color: #5BDEFF;
-  color: #1C454F;
-}
-
-.title {
-  margin-top: 5px;
-}
-
-.title h1 {
-  font-size: 30px;
-}
-
-.content {
-  padding: 20px 100px;
-  min-height: 500px;
-}
-
-/* Footer */
-.footer {
-  height: 80px;
-  padding: 20px 100px 0px 100px;
-  background: #e3e3e3;
-  font-size: 12px;
-}
-
-.footer a {
-  color: #000;
-  display: flex;
-  margin-bottom: 5px;
-}
-
-h1 {
+nav {
+  text-align: left;
+  padding: 20px;
   font-size: 20px;
+  background-color: rgb(34, 31, 32);
+  margin: -10px;
+  margin-bottom: 50px;
 }
 
-h2 {
-  font-size: 14px;
+nav a {
+  font-weight: bold;
+  color: white;
+}
+
+nav a.router-link-exact-active {
+  color: rgb(23, 87, 189);
 }
 </style>
