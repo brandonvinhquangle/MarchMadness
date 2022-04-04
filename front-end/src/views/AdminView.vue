@@ -35,11 +35,11 @@
       </div>
     </div>
     <div class="upload" v-if="findTeam">
-      <input v-model="findTeam.name">
-      <input v-model="findTeam.record">
-      <input v-model="findTeam.conference">
-      <input v-model="findTeam.city">
-      <input v-model="findTeam.state">
+      <input v-model="findTeam.name" placeholder="Name">
+      <input v-model="findTeam.record" placeholder="Record">
+      <input v-model="findTeam.conference" placeholder="Conference">
+      <input v-model="findTeam.city" placeholder="City">
+      <input v-model="findTeam.state" placeholder="State">
       <p></p>
       <img :src="findTeam.path" />
     </div>
@@ -188,7 +188,7 @@ select,
 button {
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .form {
