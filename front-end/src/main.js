@@ -8,21 +8,20 @@ Vue.config.productionTip = false
 
 Vue.component('FooterComponent', footer)
 
-// let data = {
-//   teams: mock,
-//   chosenTeam: {
-//     id: 0,
-//     name: String,
-//     record: String,
-//     conference: String,
-//     city: String,
-//     state: String,
-//     image: String
-//   }
-// }
+let data = {
+  chosenTeam: {
+    id: null,
+    name: String,
+    record: String,
+    conference: String,
+    city: String,
+    state: String,
+    image: String
+  }
+}
 
 new Vue({
   router,
-  // data,
+  data,
   render: h => h(App)
 }).$mount('#app')

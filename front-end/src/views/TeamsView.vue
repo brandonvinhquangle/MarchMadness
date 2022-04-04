@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1 class="title">Top 12 March Madness Teams</h1>
+    <h1 class="title">March Madness Teams</h1>
     <h2>Pick the Team You Think Will Win!</h2>
-    <h3>Click on the team logo and the selected team will appear now on the homepage.</h3>
+    <h3>Click on the Team Logo and the Selected Team will Now Appear on the Home Page.</h3>
     <br><br>
     <TeamCard :teams="teams" />
   </div>

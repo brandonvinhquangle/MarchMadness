@@ -13,10 +13,10 @@
     <p>With 11 national titles, UCLA has the record for the most NCAA Men's Division I Basketball</p>
     <img alt="UCLA logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/UCLA_Bruins_logo.svg/2560px-UCLA_Bruins_logo.svg.png" style="height: 200px">
     <h2>Who Do You Think Will Win This Year?</h2>
-    <h3 v-if="this.$root.$data.chosenTeam.id === 0">Navigate to the Teams Page to pick a Predicted Winner</h3>
+    <h3 v-if="this.$root.$data.chosenTeam.id === null">Navigate to the Teams Page to pick a Predicted Winner</h3>
     <div v-else>
       <h3>You Picked: {{ predictedWinner }}</h3>
-      <img id="chosenTeamImage" :src=this.$root.$data.chosenTeam.image>
+      <img id="chosenTeamImage" :src=this.$root.$data.chosenTeam.path>
     </div>
   </div>
 </template>
