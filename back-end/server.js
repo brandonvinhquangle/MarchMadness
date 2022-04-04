@@ -27,22 +27,25 @@ const upload = multer({
 });
 
 /* Data for the APIs */
-// Creates a scheme for items in the museum: a title and a path to an image.
-const itemSchema = new mongoose.Schema({
-  title: String,
-  description: String,
+// Creates a scheme for team: a title and a path to an image.
+const teamSchema = new mongoose.Schema({
+  name: String,
+  record: String,
+  conference: String,
+  city: String,
+  state: String,
   path: String,
 });
 
 // Creates a model for items in the museum.
-const Item = mongoose.model('Item', itemSchema);
+const Team = mongoose.model('Team', teamSchema);
 
 /* REST APIs */
 // Get a list of all of the items in the museum.
-app.get('/api/items', async (req, res) => {
+app.get('/api/team', async (req, res) => {
   try {
-    let items = await Item.find();
-    res.send(items);
+    let teams = await Team.find();
+    res.send(teams);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -50,15 +53,18 @@ app.get('/api/items', async (req, res) => {
 });
 
 // Creates a new item in the museum: takes a title and a path to an image.
-app.post('/api/items', async (req, res) => {
-  const item = new Item({
-    title: req.body.title,
-    description: req.body.description,
+app.post('/api/teams', async (req, res) => {
+  const team = new Team({
+    name: req.body.name,
+    record: req.body.record,
+    conference: req.body.conference,
+    city: req.body.city,
+    state: req.body.state,
     path: req.body.path,
   });
   try {
-    await item.save();
-    res.send(item);
+    await team.save();
+    res.send(team);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
@@ -77,10 +83,10 @@ app.post('/api/photos', upload.single('photo'), async (req, res) => {
   });
 });
 
-// Deletes an item in the museum: takes an id
-app.delete('/api/items/:id', async (req, res) => {
+// Deletes an team in the museum: takes an id
+app.delete('/api/teams/:id', async (req, res) => {
   try {
-    await Item.deleteOne({
+    await Team.deleteOne({
       _id: req.params.id
     });
   } catch (error) {
@@ -89,14 +95,17 @@ app.delete('/api/items/:id', async (req, res) => {
   }
 });
 
-// Edits an item in the museum: takes an id and a title
-app.put('/api/items/:id', async (req, res) => {
-  const item = await Item.findOne({_id:req.params.id});
+// Edits a team in the museum: takes an id and a title
+app.put('/api/teams/:id', async (req, res) => {
+  const team = await Team.findOne({_id:req.params.id});
   try {
-    item.title = req.body.title;
-    item.description = req.body.description;
-    await item.save();
-    res.send(item);
+    team.name = req.body.name;
+    team.record = req.body.record;
+    team.conference = req.body.conference;
+    team.city = req.body.city;
+    team.state = req.body.state;    
+    await team.save();
+    res.send(team);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
